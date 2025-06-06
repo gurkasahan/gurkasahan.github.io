@@ -1,54 +1,52 @@
-import { Box, Heading, Text, VStack, Link } from "@chakra-ui/react";
+import {
+  Box,
+  Heading,
+  Text,
+  VStack,
+  Link,
+  IconButton,
+  useColorMode,
+  HStack,
+  ChakraProvider
+} from "@chakra-ui/react";
+import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import About from "./components/About";
+import Projects from "./components/Projects";
+import Contact from "./components/Contact";
+import Experience from "./components/Experience";
+
+
 
 function App() {
+  const { colorMode, toggleColorMode } = useColorMode();
+
   return (
-    <Box p={10} maxW="800px" mx="auto">
-      <VStack spacing={10} align="start">
+    <ChakraProvider>
+      <Box>
+        <Navbar />
+        <Hero />
 
-        <Box>
-          <Heading size="2xl">Gurk Asahan</Heading>
-          <Text fontSize="lg" color="gray.600">
-            Software Engineer · Data Analyst · Product Enthusiast
-          </Text>
-        </Box>
+        <Box p={6} maxW="900px" mx="auto">
+          <HStack justify="flex-end" mb={4}>
+            <IconButton
+              icon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+              onClick={toggleColorMode}
+              aria-label="Toggle Dark Mode"
+            />
+          </HStack>
 
-        <Box>
-          <Heading size="lg">Projects</Heading>
-          <VStack align="start" mt={4} spacing={3}>
-            <Box>
-              <Text fontWeight="bold">Predictive Maintenance ML App</Text>
-              <Link color="blue.500" href="https://github.com/gurkasahan/predictive-maintenance-ml" isExternal>
-                GitHub Repo
-              </Link>
-            </Box>
-            <Box>
-              <Text fontWeight="bold">Parkinson’s Detection ML Model</Text>
-              <Link color="blue.500" href="https://github.com/gurkasahan/MachineLearning-Parkinson-Detection" isExternal>
-                GitHub Repo
-              </Link>
-            </Box>
-            <Box>
-              <Text fontWeight="bold">Global Life Expectancy Analysis</Text>
-              <Link color="blue.500" href="https://github.com/gurkasahan/global-life-expectancy-analysis" isExternal>
-                GitHub Repo
-              </Link>
-            </Box>
+          <VStack align="start" spacing={10}>
+            <About />
+            <Projects />
+            <Experience />
+            <Contact />
+
           </VStack>
         </Box>
-
-        <Box>
-          <Heading size="lg">Contact</Heading>
-          <Text>Email: gurk.asahan@gmail.com</Text>
-          <Text>
-            GitHub: <Link href="https://github.com/gurkasahan" isExternal color="blue.500">gurkasahan</Link>
-          </Text>
-          <Text>
-            LinkedIn: <Link href="https://linkedin.com/in/gurkasahan" isExternal color="blue.500">gurkasahan</Link>
-          </Text>
-        </Box>
-
-      </VStack>
-    </Box>
+      </Box>
+    </ChakraProvider>
   );
 }
 
